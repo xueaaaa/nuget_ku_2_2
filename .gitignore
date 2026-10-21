@@ -1,0 +1,6 @@
+*.exe
+*.test
+*.out
+*.svg
+*.pdf
+.idea/
