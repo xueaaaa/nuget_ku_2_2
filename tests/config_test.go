@@ -85,3 +85,10 @@ func TestTestRepository(t *testing.T) {
 		t.Fatalf("отсутствующий файл принят: %v", err)
 	}
 }
+
+func TestSinglePartNuGetVersion(t *testing.T) {
+	settings, err := config.Parse(append(baseArgs(), "--version", "1"))
+	if err != nil || settings.Version != "1" {
+		t.Fatalf("допустимая версия NuGet отклонена: %+v, %v", settings, err)
+	}
+}

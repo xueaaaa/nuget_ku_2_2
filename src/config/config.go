@@ -17,7 +17,7 @@ var (
 	packagePattern     = regexp.MustCompile(`^[A-Za-z0-9][A-Za-z0-9_.-]*$`)
 	testPackagePattern = regexp.MustCompile(`^[A-Z]+$`)
 	versionPattern     = regexp.MustCompile(
-		`^[0-9]+(\.[0-9]+){1,3}(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$`,
+		`^[0-9]+(\.[0-9]+){0,3}(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$`,
 	)
 )
 
@@ -72,7 +72,7 @@ func validate(settings Settings, flags *flag.FlagSet) error {
 		return err
 	}
 	if !versionPattern.MatchString(settings.Version) {
-		return errors.New("--version: укажите версию вида 1.2, 1.2.3 или 1.2.3.4")
+		return errors.New("--version: укажите версию вида 1, 1.2, 1.2.3 или 1.2.3.4")
 	}
 	if err := validateOutput(settings.Output); err != nil {
 		return err
