@@ -64,6 +64,11 @@ func FetchDirect(ctx context.Context, client *http.Client, indexURL string,
 	if err != nil {
 		return Result{}, err
 	}
+	return fetchDirectFromBase(ctx, client, base, packageID, version)
+}
+
+func fetchDirectFromBase(ctx context.Context, client *http.Client,
+	base string, packageID string, version string) (Result, error) {
 	manifestURL := buildManifestURL(base, packageID, version)
 	data, err := getBody(ctx, client, manifestURL)
 	if err != nil {
