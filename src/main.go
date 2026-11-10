@@ -28,6 +28,14 @@ func main() {
 	if err != nil {
 		exitWithError(err)
 	}
+	if settings.LoadOrder {
+		order, err := graph.LoadOrder(result)
+		if err != nil {
+			exitWithError(err)
+		}
+		graph.PrintLoadOrder(os.Stdout, result.Root, order)
+		return
+	}
 	graph.Print(os.Stdout, result)
 }
 
