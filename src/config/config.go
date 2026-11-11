@@ -28,7 +28,6 @@ type Settings struct {
 	Version    string
 	Output     string
 	ASCIITree  bool
-	LoadOrder  bool
 	MaxDepth   int
 	Filter     string
 }
@@ -57,7 +56,6 @@ func newFlagSet(settings *Settings) *flag.FlagSet {
 	flags.StringVar(&settings.Version, "version", "", "версия пакета")
 	flags.StringVar(&settings.Output, "output", "graph.svg", "имя SVG-файла")
 	flags.BoolVar(&settings.ASCIITree, "ascii-tree", false, "вывод ASCII-дерева")
-	flags.BoolVar(&settings.LoadOrder, "load-order", false, "порядок загрузки пакетов")
 	flags.IntVar(&settings.MaxDepth, "max-depth", defaultDepth, "максимальная глубина")
 	flags.StringVar(&settings.Filter, "filter", "", "подстрока фильтра")
 	return flags
@@ -142,7 +140,6 @@ func Print(output io.Writer, settings Settings) {
 	fmt.Fprintf(output, "version = %s\n", settings.Version)
 	fmt.Fprintf(output, "output = %s\n", settings.Output)
 	fmt.Fprintf(output, "ascii_tree = %t\n", settings.ASCIITree)
-	fmt.Fprintf(output, "load_order = %t\n", settings.LoadOrder)
 	fmt.Fprintf(output, "max_depth = %d\n", settings.MaxDepth)
 	fmt.Fprintf(output, "filter = %s\n", settings.Filter)
 }

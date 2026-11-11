@@ -11,6 +11,7 @@ import (
 	"nuget_ku_2_2/src/graph"
 	"nuget_ku_2_2/src/nuget"
 	"nuget_ku_2_2/src/testrepo"
+	"nuget_ku_2_2/src/visual"
 )
 
 func main() {
@@ -28,15 +29,13 @@ func main() {
 	if err != nil {
 		exitWithError(err)
 	}
-	if settings.LoadOrder {
-		order, err := graph.LoadOrder(result)
-		if err != nil {
-			exitWithError(err)
-		}
-		graph.PrintLoadOrder(os.Stdout, result.Root, order)
-		return
+	visual.PrintMermaid(os.Stdout, result)
+	if err := visual.WriteSVG(settings.Output, result); err != nil {
+		exitWithError(err)
 	}
-	graph.Print(os.Stdout, result)
+	if settings.ASCIITree {
+		visual.PrintASCII(os.Stdout, result)
+	}
 }
 
 func newSource(settings config.Settings) (graph.Source, error) {
